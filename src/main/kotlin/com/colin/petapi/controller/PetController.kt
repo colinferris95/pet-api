@@ -1,5 +1,6 @@
 package com.colin.petapi.controller
 
+import com.colin.petapi.model.Pet
 import com.colin.petapi.service.PetService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,7 +12,7 @@ class PetController {
     private lateinit var petService: PetService
 
     @GetMapping("/pets")
-    fun getPets(): String {
+    fun getPets(): ArrayList<Pet> {
         return petService.getPets()
     }
 }
