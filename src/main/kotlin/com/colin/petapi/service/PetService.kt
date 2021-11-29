@@ -6,11 +6,17 @@ import org.springframework.stereotype.Service
 @Service
 class PetService {
 
-    var pet1 : Pet = Pet("Lassie","Old Yeller")
+    var pet1 : Pet = Pet(1,"Lassie","Old Yeller")
 
-    var listOfPets : ArrayList<Pet> = arrayListOf(pet1)
+    var pet2 : Pet = Pet(2,"Toto","Wizard of Oz")
 
-    fun getPets(): ArrayList<Pet> {
+    var listOfPets : ArrayList<Pet> = arrayListOf(pet1,pet2)
+
+    fun getPets(): List<Pet> {
         return listOfPets
+    }
+
+    fun getPet(id: Int): List<Pet> {
+        return listOfPets.filter { it.id == id }
     }
 }
