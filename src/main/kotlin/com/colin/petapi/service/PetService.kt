@@ -19,4 +19,10 @@ class PetService {
     fun getPet(id: Int): List<Pet> {
         return listOfPets.filter { it.id == id }
     }
+
+    fun createPet(pet:Pet): List<Pet> {
+        var newPet : Pet = Pet((listOfPets.size + 1), pet.name, pet.description)
+        listOfPets.add(newPet)
+        return listOfPets
+    }
 }
