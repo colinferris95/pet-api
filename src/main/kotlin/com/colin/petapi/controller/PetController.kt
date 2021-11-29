@@ -26,4 +26,10 @@ class PetController {
         petService.createPet(pet)
         return petService.getPets()
     }
+
+    @DeleteMapping("/pets")
+    fun delete(@RequestParam(name = "id", required = true) id: Int? = null): List<Pet> {
+        petService.deletePet(id!!)
+        return petService.getPets()
+    }
 }

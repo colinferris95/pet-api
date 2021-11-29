@@ -25,4 +25,9 @@ class PetService {
         listOfPets.add(newPet)
         return listOfPets
     }
+
+    fun deletePet(id:Int): List<Pet>{
+        listOfPets.removeIf { it.id == id }
+        return listOfPets
+    }
 }
