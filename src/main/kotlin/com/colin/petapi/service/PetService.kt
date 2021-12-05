@@ -1,42 +1,41 @@
 package com.colin.petapi.service
 
 import com.colin.petapi.model.Pet
+import com.colin.petapi.repository.IPetRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 @Service
 class PetService {
 
-    var pet1 : Pet = Pet(1,"Lassie","Old Yeller")
-
-    var pet2 : Pet = Pet(2,"Toto","Wizard of Oz")
-
-    var listOfPets : ArrayList<Pet> = arrayListOf(pet1,pet2)
+    @Autowired
+    private lateinit var petRepository: IPetRepository
 
 
-    fun getPets(): List<Pet> {
-        return listOfPets
+    fun getPets(): MutableIterable<Pet> {
+        return petRepository.findAll()
     }
 
-    fun getPet(id: Int): List<Pet> {
-        return listOfPets.filter { it.id == id }
+    fun getPet(id: Long): Optional<Pet> {
+        return petRepository.findById(id)
     }
 
-    fun createPet(pet:Pet): List<Pet> {
-        var newPet : Pet = Pet((listOfPets.size + 1), pet.name, pet.description)
-        listOfPets.add(newPet)
-        return listOfPets
+    fun createPet(pet:Pet): MutableIterable<Pet> {
+        petRepository.save(pet)
+        return petRepository.findAll()
     }
 
-    fun updatePet(pet:Pet): List<Pet>{
-        val updatedPets: MutableList<Pet> = listOfPets.toMutableList().apply {
-            this[pet.id -1] = pet
-        }
-        listOfPets = updatedPets as ArrayList<Pet>
-        return updatedPets
+    fun updatePet(pet:Pet): MutableIterable<Pet> {
+        petRepository.save(pet)
+        return petRepository.findAll()
     }
 
-    fun deletePet(id:Int): List<Pet>{
-        listOfPets.removeIf { it.id == id }
-        return listOfPets
+    fun deletePet(id:Long): MutableIterable<Pet> {
+        val petToDelete: Pet = petRepository.findById(id).orElse(null)
+        petRepository.delete(petToDelete)
+        return petRepository.findAll()
     }
 }
