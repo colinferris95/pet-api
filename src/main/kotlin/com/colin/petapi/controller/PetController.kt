@@ -12,7 +12,7 @@ class PetController {
 
 
     @GetMapping("/pets")
-    fun getPets(@RequestParam(name = "id", required = false) id: Int? = null): List<Pet> {
+    fun get(@RequestParam(name = "id", required = false) id: Int? = null): List<Pet> {
         if (id === null){
             return petService.getPets()
         }
@@ -24,6 +24,12 @@ class PetController {
     @PostMapping("/pets")
     fun post(@RequestBody pet: Pet): List<Pet> {
         petService.createPet(pet)
+        return petService.getPets()
+    }
+
+    @PutMapping("/pets")
+    fun put(@RequestBody pet: Pet): List<Pet> {
+        petService.updatePet(pet)
         return petService.getPets()
     }
 

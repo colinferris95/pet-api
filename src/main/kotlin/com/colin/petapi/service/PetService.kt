@@ -12,6 +12,7 @@ class PetService {
 
     var listOfPets : ArrayList<Pet> = arrayListOf(pet1,pet2)
 
+
     fun getPets(): List<Pet> {
         return listOfPets
     }
@@ -24,6 +25,14 @@ class PetService {
         var newPet : Pet = Pet((listOfPets.size + 1), pet.name, pet.description)
         listOfPets.add(newPet)
         return listOfPets
+    }
+
+    fun updatePet(pet:Pet): List<Pet>{
+        val updatedPets: MutableList<Pet> = listOfPets.toMutableList().apply {
+            this[pet.id -1] = pet
+        }
+        listOfPets = updatedPets as ArrayList<Pet>
+        return updatedPets
     }
 
     fun deletePet(id:Int): List<Pet>{
