@@ -9,3 +9,8 @@ ADD COLUMN `description` MEDIUMTEXT NULL AFTER `name`;
 CREATE TABLE `master`.`owners` (
 `id` INT(11) NOT NULL AUTO_INCREMENT,
 PRIMARY KEY (`id`));
+
+ALTER TABLE `master`.`pets`
+    CHANGE COLUMN `name` `name` MEDIUMTEXT NOT NULL ,
+    CHANGE COLUMN `description` `description` MEDIUMTEXT NOT NULL ;
+

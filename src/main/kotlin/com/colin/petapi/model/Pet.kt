@@ -1,6 +1,5 @@
 package com.colin.petapi.model
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @Entity
@@ -13,8 +12,10 @@ class Pet {
     @Column(name = "id")
     var id: Long? = null
 
+    @Column(nullable = false)
     var name: String? = null
 
+    @Column(nullable = false)
     var description: String? = null
 
 }

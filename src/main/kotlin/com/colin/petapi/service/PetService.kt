@@ -2,10 +2,14 @@ package com.colin.petapi.service
 
 import com.colin.petapi.model.Pet
 import com.colin.petapi.repository.IPetRepository
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
+import org.json.JSONArray
+import org.json.JSONTokener
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @Service
@@ -14,28 +18,39 @@ class PetService {
     @Autowired
     private lateinit var petRepository: IPetRepository
 
+    @Autowired
+    private lateinit var messageService: MessageService
 
-    fun getPets(): MutableIterable<Pet> {
-        return petRepository.findAll()
+    var parser: JsonParser = JsonParser()
+    val gson = Gson()
+
+    fun getPets(): Iterable<Pet> {
+            val foundPets : Iterable<Pet> = petRepository.findAll()
+            return foundPets
+
     }
 
-    fun getPet(id: Long): Optional<Pet> {
-        return petRepository.findById(id)
+    fun getPet(id: Long): Iterable<Pet> {
+        val foundPets : Iterable<Pet> = petRepository.findAll()
+        return foundPets
     }
 
-    fun createPet(pet:Pet): MutableIterable<Pet> {
+    fun createPet(pet:Pet): Iterable<Pet> {
         petRepository.save(pet)
-        return petRepository.findAll()
+        val foundPets : Iterable<Pet> = petRepository.findAll()
+        return foundPets
     }
 
-    fun updatePet(pet:Pet): MutableIterable<Pet> {
+    fun updatePet(pet:Pet): Iterable<Pet> {
         petRepository.save(pet)
-        return petRepository.findAll()
+        val foundPets : Iterable<Pet> = petRepository.findAll()
+        return foundPets
     }
 
-    fun deletePet(id:Long): MutableIterable<Pet> {
+    fun deletePet(id:Long): Iterable<Pet> {
         val petToDelete: Pet = petRepository.findById(id).orElse(null)
         petRepository.delete(petToDelete)
-        return petRepository.findAll()
+        val foundPets : Iterable<Pet> = petRepository.findAll()
+        return foundPets
     }
 }
