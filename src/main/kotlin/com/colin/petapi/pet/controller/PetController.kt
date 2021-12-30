@@ -1,15 +1,14 @@
-package com.colin.petapi.controller
+package com.colin.petapi.pet.controller
 
-import com.colin.petapi.model.Pet
+import com.colin.petapi.pet.model.Pet
 import com.colin.petapi.service.MessageService
-import com.colin.petapi.service.PetService
+import com.colin.petapi.pet.service.PetService
 import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
-import java.io.IOException
 
 
 @RestController
@@ -31,7 +30,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petNotFound(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.notFound(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -44,7 +43,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petNotFound(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.notFound(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -57,7 +56,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToSave(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToSave(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -70,7 +69,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToSave(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToSave(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -83,7 +82,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToDelete(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToDelete(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
