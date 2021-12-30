@@ -1,15 +1,14 @@
-package com.colin.petapi.controller
+package com.colin.petapi.pet.controller
 
-import com.colin.petapi.model.Pet
+import com.colin.petapi.pet.model.Pet
 import com.colin.petapi.service.MessageService
-import com.colin.petapi.service.PetService
+import com.colin.petapi.pet.service.PetService
 import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
-import java.io.IOException
 
 
 @RestController

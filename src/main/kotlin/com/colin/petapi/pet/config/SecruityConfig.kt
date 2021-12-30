@@ -1,4 +1,4 @@
-package com.colin.petapi.config
+package com.colin.petapi.pet.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -30,6 +30,13 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
             .and()
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/pets").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/pets").hasRole("ADMIN")
+            .antMatchers(HttpMethod.DELETE, "/pets").hasRole("ADMIN")
+            .antMatchers(HttpMethod.PUT, "/pets").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/owners").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/owners").hasRole("ADMIN")
+            .antMatchers(HttpMethod.DELETE, "/owners").hasRole("ADMIN")
+            .antMatchers(HttpMethod.PUT, "/owners").hasRole("ADMIN")
             .and()
             .csrf().disable()
             .formLogin().disable()

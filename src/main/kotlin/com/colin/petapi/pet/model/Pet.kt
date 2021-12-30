@@ -1,4 +1,4 @@
-package com.colin.petapi.model
+package com.colin.petapi.pet.model
 
 import javax.persistence.*
 
