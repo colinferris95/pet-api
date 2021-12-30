@@ -32,7 +32,7 @@ class OwnerController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petNotFound(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.notFound(exception.message!!,"owner")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
 
@@ -46,7 +46,34 @@ class OwnerController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToSave(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToSave(exception.message!!,"owner")} ")
+            return ResponseEntity(failureResponse, HttpStatus.OK)
+        }
+    }
+
+
+    @PutMapping("/owners")
+    fun put(@RequestBody owner: Owner): ResponseEntity<Any> {
+        try{
+            val jsonData: String = Gson().toJson(ownerService.updateOwner(owner))
+            val successResponse: String = messageService.responseFormat("true",jsonData)
+            return ResponseEntity(successResponse, HttpStatus.OK)
+        }
+        catch(exception: Exception){
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToSave(exception.message!!,"owner")} ")
+            return ResponseEntity(failureResponse, HttpStatus.OK)
+        }
+    }
+
+    @DeleteMapping("/owners")
+    fun delete(@RequestParam(name = "id", required = true) id: Long? = null): ResponseEntity<Any> {
+        try{
+            val jsonData: String = Gson().toJson(ownerService.deleteOwner(id!!))
+            val successResponse: String = messageService.responseFormat("true",jsonData)
+            return ResponseEntity(successResponse, HttpStatus.OK)
+        }
+        catch(exception: Exception){
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToDelete(exception.message!!,"owner")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }

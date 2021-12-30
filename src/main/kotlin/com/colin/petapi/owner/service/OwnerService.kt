@@ -20,8 +20,6 @@ class OwnerService {
     @Autowired
     private lateinit var messageService: MessageService
 
-    var parser: JsonParser = JsonParser()
-    val gson = Gson()
 
     fun getOwners(): Iterable<Owner> {
         val foundOwners : Iterable<Owner> = ownerRepository.findAll()
@@ -31,6 +29,19 @@ class OwnerService {
 
     fun createOwner(owner: Owner): Iterable<Owner> {
         ownerRepository.save(owner)
+        val foundOwners : Iterable<Owner> = ownerRepository.findAll()
+        return foundOwners
+    }
+
+    fun updateOwner(owner: Owner): Iterable<Owner> {
+        ownerRepository.save(owner)
+        val foundOwners : Iterable<Owner> = ownerRepository.findAll()
+        return foundOwners
+    }
+
+    fun deleteOwner(id:Long): Iterable<Owner> {
+        val ownerToDelete: Owner = ownerRepository.findById(id).orElse(null)
+        ownerRepository.delete(ownerToDelete)
         val foundOwners : Iterable<Owner> = ownerRepository.findAll()
         return foundOwners
     }

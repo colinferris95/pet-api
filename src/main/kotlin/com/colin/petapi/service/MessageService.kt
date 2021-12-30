@@ -7,20 +7,20 @@ import org.springframework.stereotype.Service
 @Service
 class MessageService {
 
-    fun petNotFound(exception:String): String {
-        return "Pet not found ERROR: ${exception}"
+    fun notFound(exception:String,modelName:String): String {
+        return "${modelName} not found ERROR: ${exception}"
     }
 
-    fun petUnableToSave(exception:String): String {
-        return "Pet not able to save ERROR: ${exception}"
+    fun unableToSave(exception:String,modelName:String): String {
+        return "${modelName} not able to save ERROR: ${exception}"
     }
 
-    fun petUnableToDelete(exception:String): String {
-        return "Pet not able to delete ERROR: ${exception}"
+    fun unableToDelete(exception:String,modelName:String): String {
+        return "${modelName} not able to delete ERROR: ${exception}"
     }
 
-    fun petUnkownError(exception:String): String {
-        return "Unknown pet service error contact IT ERROR: ${exception}"
+    fun unkownError(exception:String,modelName:String): String {
+        return "Unknown ${modelName} service error contact IT ERROR: ${exception}"
     }
 
     fun responseFormat(success:String, data: String): String {

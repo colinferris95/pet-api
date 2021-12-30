@@ -30,7 +30,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petNotFound(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.notFound(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -43,7 +43,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petNotFound(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.notFound(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -56,7 +56,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToSave(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToSave(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -69,7 +69,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToSave(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToSave(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
@@ -82,7 +82,7 @@ class PetController {
             return ResponseEntity(successResponse, HttpStatus.OK)
         }
         catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.petUnableToDelete(exception.message!!)} ")
+            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.unableToDelete(exception.message!!,"pet")} ")
             return ResponseEntity(failureResponse, HttpStatus.OK)
         }
     }
