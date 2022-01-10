@@ -1,9 +1,10 @@
 package com.colin.petapi.ownersToPets.controller
 
 import com.colin.petapi.ownersToPets.service.OwnersToPetsService
-import com.colin.petapi.service.MessageService
+import com.colin.petapi.message.service.MessageService
 import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
