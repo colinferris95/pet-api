@@ -49,7 +49,7 @@ class OwnerController {
 
     }
 
-    @GetMapping("/owners/pets/{ownerId}")
+    @GetMapping("/owners/{ownerId}/pets")
     @ResponseBody
     fun getPetsByOwner(@PathVariable("ownerId") ownerId: Long): ResponseEntity<Any> {
         try{

@@ -67,24 +67,6 @@ class PetController {
         }
     }
 
-    @PostMapping("/pets/{petId}/owners/{ownerId}")
-    @ResponseBody
-    fun getPetsByOwner(@PathVariable("ownerId") ownerId: Long,@PathVariable("petId") petId: Long): ResponseEntity<Any> {
-        try{
-            val newOwnersToPets: OwnersToPets = OwnersToPets()
-            newOwnersToPets.petsId = petId
-            newOwnersToPets.ownersId = ownerId
-            val foundOwnersToPets : Iterable<OwnersToPets> = ownersToPetsService.createOwnersToPets(newOwnersToPets)!!
-            val jsonData: String = Gson().toJson(foundOwnersToPets)
-            val successResponse: String = messageService.responseFormat("true",jsonData)
-            return ResponseEntity(successResponse, HttpStatus.OK)
-        }
-        catch(exception: Exception){
-            val failureResponse: String = messageService.responseFormat("false","ERROR: ${messageService.notFound(exception.message!!,"pet")} ")
-            return ResponseEntity(failureResponse, HttpStatus.OK)
-        }
-    }
-
     @PutMapping("/pets")
     fun put(@RequestBody pet: Pet): ResponseEntity<Any> {
         try{
