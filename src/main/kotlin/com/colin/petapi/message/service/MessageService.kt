@@ -1,4 +1,4 @@
-package com.colin.petapi.service
+package com.colin.petapi.message.service
 
 import com.google.gson.Gson
 import org.json.JSONTokener

@@ -1,10 +1,13 @@
 package com.colin.petapi.pet.controller
 
 import com.colin.petapi.pet.model.Pet
-import com.colin.petapi.service.MessageService
+import com.colin.petapi.message.service.MessageService
+import com.colin.petapi.ownersToPets.model.OwnersToPets
+import com.colin.petapi.ownersToPets.service.OwnersToPetsService
 import com.colin.petapi.pet.service.PetService
 import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -19,6 +22,9 @@ class PetController {
 
     @Autowired
     private lateinit var messageService: MessageService
+
+    @Autowired
+    private lateinit var ownersToPetsService: OwnersToPetsService
 
 
     @GetMapping("/pets")
@@ -35,10 +41,10 @@ class PetController {
         }
     }
 
-    @GetMapping("/pets/:id")
-    fun getById(@RequestParam(name = "id", required = true) id: Long? = null): ResponseEntity<Any> {
+    @GetMapping("/pets/{petId}")
+    fun getById(@PathVariable("petId") petId: Long): ResponseEntity<Any> {
         try{
-            val jsonData: String = Gson().toJson(petService.getPet(id!!))
+            val jsonData: String = Gson().toJson(petService.getPet(petId!!))
             val successResponse: String = messageService.responseFormat("true",jsonData)
             return ResponseEntity(successResponse, HttpStatus.OK)
         }

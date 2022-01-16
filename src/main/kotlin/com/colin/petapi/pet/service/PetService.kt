@@ -1,11 +1,17 @@
 package com.colin.petapi.pet.service
 
+import com.colin.petapi.owner.OwnerPackage
+import com.colin.petapi.ownersToPets.OwnersToPetsPackage
+import com.colin.petapi.pet.PetPackage
 import com.colin.petapi.pet.model.Pet
 import com.colin.petapi.pet.repository.IPetRepository
-import com.colin.petapi.service.MessageService
+import com.colin.petapi.message.service.MessageService
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.stereotype.Service
 
 
@@ -27,9 +33,10 @@ class PetService {
 
     }
 
-    fun getPet(id: Long): Iterable<Pet> {
-        val foundPets : Iterable<Pet> = petRepository.findAll()
-        return foundPets
+    fun getPet(id: Long): Pet {
+        //fix
+        val foundPet : Pet = petRepository.findById(id!!).orElse(null);
+        return foundPet
     }
 
     fun createPet(pet: Pet): Iterable<Pet> {
@@ -48,6 +55,11 @@ class PetService {
         val petToDelete: Pet = petRepository.findById(id).orElse(null)
         petRepository.delete(petToDelete)
         val foundPets : Iterable<Pet> = petRepository.findAll()
+        return foundPets
+    }
+
+    fun getPetsById(ids:ArrayList<Long>): Iterable<Pet>{
+        val foundPets : Iterable<Pet> = petRepository.findPetsByMultipleId(ids)
         return foundPets
     }
 }
