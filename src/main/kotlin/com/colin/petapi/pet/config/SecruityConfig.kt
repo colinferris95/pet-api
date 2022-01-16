@@ -1,7 +1,9 @@
 package com.colin.petapi.pet.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.PropertySource
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -10,7 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
+@PropertySource("classpath:application.properties")
 class SecurityConfig : WebSecurityConfigurerAdapter() {
+
+    @Value("\${security.user.name}")
+    private lateinit var userName: String
+
+    @Value("\${security.user.password}")
+    private lateinit var password: String
 
     @Bean
     fun encoder(): PasswordEncoder {
@@ -19,9 +28,9 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
-            .withUser("admin")
-            .password(encoder().encode("pass"))
-            .roles("DOCTOR", "ADMIN")
+            .withUser(userName)
+            .password(encoder().encode(password))
+            .roles("ADMIN")
     }
 
     @Throws(Exception::class)
