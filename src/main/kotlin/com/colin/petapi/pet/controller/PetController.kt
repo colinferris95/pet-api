@@ -41,10 +41,10 @@ class PetController {
         }
     }
 
-    @GetMapping("/pets/:id")
-    fun getById(@RequestParam(name = "id", required = true) id: Long? = null): ResponseEntity<Any> {
+    @GetMapping("/pets/{petId}")
+    fun getById(@PathVariable("petId") petId: Long): ResponseEntity<Any> {
         try{
-            val jsonData: String = Gson().toJson(petService.getPet(id!!))
+            val jsonData: String = Gson().toJson(petService.getPet(petId!!))
             val successResponse: String = messageService.responseFormat("true",jsonData)
             return ResponseEntity(successResponse, HttpStatus.OK)
         }

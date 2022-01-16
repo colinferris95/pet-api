@@ -33,10 +33,10 @@ class PetService {
 
     }
 
-    fun getPet(id: Long): Iterable<Pet> {
+    fun getPet(id: Long): Pet {
         //fix
-        val foundPets : Iterable<Pet> = petRepository.findAll()
-        return foundPets
+        val foundPet : Pet = petRepository.findById(id!!).orElse(null);
+        return foundPet
     }
 
     fun createPet(pet: Pet): Iterable<Pet> {
